@@ -1,8 +1,41 @@
 <div class="columns">
     <div class="column is-half">
-        <p class="has-text-centered notification is-info">{{categories.length}} Categories</p>
+        <ul class="menu-list">
+            <li><a (click)="changeCategory()">Home</a></li>
+            <li *ngFor="let cat of categories"><a [class.is-active]="cat == selectedCategory" (click)="changeCategory(cat)">{{ cat }}</a></li>
+        </ul>
     </div>
     <div class="column is-half">
-        <p class="has-text-centered notification is-warning">{{products.length}} Products</p>
+        <div *ngFor="let product of products" class="box">
+            <article class="media">
+                <div class="media-left">
+                    <figure class="image is-64x64">
+                        <i class="fa fa-gift" aria-hidden="true"></i>
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <div class="content">
+                        <h4><strong>{{ product.name }}</strong></h4>
+                        <p>{{ product.description }}</p>
+                    </div>
+                </div>
+                <div class="media-right">
+                    <figure class="image">
+                        <span class="tag is-primary">{{ product.price | currency:"USD":true:"2.2-2" }}</span>
+                    </figure>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+<div class="columns">
+    <div class="column">
+        <nav class="pagination is-centered">
+            <ul class="pagination-list">
+                <li *ngFor="let page of pageNumbers">
+                    <a class="pagination-link" (click)="changePage(page)" [class.is-active]="page == selectedPage">{{ page }}</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
