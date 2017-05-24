@@ -10,9 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var product_repository_1 = require("../model/product.repository");
+var cart_model_1 = require("../model/cart.model");
 var StoreComponent = (function () {
-    function StoreComponent(repository) {
+    function StoreComponent(repository, cart) {
         this.repository = repository;
+        this.cart = cart;
         this.selectedCategory = null;
         this.productsPerPage = 4;
         this.selectedPage = 1;
@@ -43,21 +45,24 @@ var StoreComponent = (function () {
         this.productsPerPage = Number(newSize);
         this.changePage(1);
     };
-    Object.defineProperty(StoreComponent.prototype, "pageNumbers", {
+    Object.defineProperty(StoreComponent.prototype, "pageCount", {
         get: function () {
-            return Array(Math.ceil(this.repository.getProducts(this.selectedCategory).length / this.productsPerPage))
-                .fill(0).map(function (x, i) { return i + 1; });
+            return Math.ceil(this.repository
+                .getProducts(this.selectedCategory).length / this.productsPerPage);
         },
         enumerable: true,
         configurable: true
     });
+    StoreComponent.prototype.addProductToCart = function (product) {
+        this.cart.addLine(product);
+    };
     StoreComponent = __decorate([
         core_1.Component({
             selector: "store",
             moduleId: module.id,
             templateUrl: "store.component.html"
         }), 
-        __metadata('design:paramtypes', [product_repository_1.ProductRepository])
+        __metadata('design:paramtypes', [product_repository_1.ProductRepository, cart_model_1.Cart])
     ], StoreComponent);
     return StoreComponent;
 }());

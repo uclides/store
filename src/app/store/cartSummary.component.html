@@ -1,0 +1,19 @@
+<nav class="nav">
+    <div class="nav-left"></div>
+    <div class="nav-right">
+        <span class="">
+            your cart:&nbsp;
+        </span>
+
+        <span class="" *ngIf="cart.itemCount > 0"> 
+        {{ cart.itemCount }} item(s)&nbsp;
+        {{ cart.cartPrice | currency:"USD":true:"2.2-2" }}
+    </span>
+        <span class="" *ngIf="cart.itemCount == 0">
+        (empty)&nbsp;
+    </span>
+        <button class="button" [disabled]="cart.itemCount == 0">
+        <i class="fa fa-shopping-cart"></i>
+    </button>
+    </div>
+</nav>

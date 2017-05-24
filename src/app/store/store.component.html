@@ -1,3 +1,6 @@
+<cart-summary>
+    <!-- section of cart-->
+</cart-summary>
 <div class="columns">
     <div class="column is-half">
         <ul class="menu-list">
@@ -23,6 +26,14 @@
                     <figure class="image">
                         <span class="tag is-primary">{{ product.price | currency:"USD":true:"2.2-2" }}</span>
                     </figure>
+                    <br>
+                    <nav class="level is-mobile">
+                        <div class="level-right">
+                            <button class="button is-danger is-outlined" (click)="addProductToCart(product)">
+                            Add to Cart
+                        </button>
+                        </div>
+                    </nav>
                 </div>
             </article>
         </div>
@@ -30,9 +41,19 @@
 </div>
 <div class="columns">
     <div class="column">
+        <span class="select">
+            <select [value]="productsPerPage" (change)="changePageSize($event.target.value)">
+                <option value="3">3 per Page</option>
+                <option value="4">4 per Page</option>
+                <option value="6">6 per Page</option>
+                <option value="8">8 per Page</option>
+            </select>
+        </span>
+    </div>
+    <div class="column">
         <nav class="pagination is-centered">
             <ul class="pagination-list">
-                <li *ngFor="let page of pageNumbers">
+                <li *counter="let page of pageCount">
                     <a class="pagination-link" (click)="changePage(page)" [class.is-active]="page == selectedPage">{{ page }}</a>
                 </li>
             </ul>
