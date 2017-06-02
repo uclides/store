@@ -14,6 +14,10 @@ var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 var app_component_1 = require('./app.component');
 var store_module_1 = require('./store/store.module');
+var store_component_1 = require('./store/store.component');
+var cartsummary_component_1 = require('./store/cartsummary.component');
+var checkout_component_1 = require('./store/checkout.component');
+var router_1 = require('@angular/router');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -26,7 +30,13 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
-                store_module_1.StoreModule
+                store_module_1.StoreModule,
+                router_1.RouterModule.forRoot([
+                    { path: "store", component: store_component_1.StoreComponent },
+                    { path: "cart", component: cartsummary_component_1.CartSummaryComponent },
+                    { path: "checkout", component: checkout_component_1.CheckoutComponent },
+                    { path: "**", redirectTo: "/store" }
+                ])
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]
