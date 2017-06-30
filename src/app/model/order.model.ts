@@ -1,8 +1,8 @@
-import { injectable } from "@angular/core";
-import { Cart } from ".cart/model"
+import { Injectable } from "@angular/core";
+import { Cart } from "./cart.model";
 
 @Injectable()
-export class Order{
+export class Order {
     public id: number;
     public name: string;
     public address: string;
@@ -14,7 +14,7 @@ export class Order{
 
     constructor(public cart: Cart) { }
 
-    clear(){
+    clear() {
         this.id = null;
         this.name = this.address = this.city = null;
         this.state = this.zip = this.country = null;
